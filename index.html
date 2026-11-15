@@ -128,6 +128,8 @@ section { padding: 56px 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { background: var(--accent-soft); color: var(--ink); border-radius: 999px; padding: 6px 14px; font-weight: 600; font-size: .95rem; }
 .chip small { color: var(--muted); font-weight: 400; }
+a.chip { text-decoration: none; border: 1px solid transparent; }
+a.chip:hover { border-color: var(--accent); color: var(--accent); }
 
 /* papers */
 .papers { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
@@ -139,7 +141,9 @@ section { padding: 56px 0; }
 .badge { display: inline-block; background: var(--mark); color: var(--ink); font-size: .8rem; font-weight: 700; padding: 1px 8px; border-radius: 6px; margin-left: 6px; vertical-align: 2px; }
 .me { font-weight: 700; color: var(--ink); }
 
-.projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.projects { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.proj-group { margin: 6px 0 10px; }
+.projects + .proj-group { margin-top: 24px; }
 .projects .card h3 { margin-bottom: 6px; }
 .projects .card p { color: var(--muted); font-size: .98rem; }
 .projects .card a { display: inline-block; margin-top: 10px; font-weight: 600; font-size: .95rem; }
@@ -284,10 +288,12 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
       <div class="card">
         <span class="label">Service and talks</span>
         <ul class="list">
-          <li><span class="year">2026</span><div><strong>Reviewer</strong><span class="sub">GlobalSouthAI workshop at NeurIPS 2026, and AfricaNLP (African Natural Language Processing) 2026.</span></div></li>
+          <li><span class="year">2026</span><div><strong>Reviewer, GlobalSouthAI workshop at NeurIPS 2026</strong></div></li>
           <li><span class="year">2026</span><div><strong>Co-author, WAXAL-NET</strong><span class="sub">A paper with 31 authors, many from CMU-Africa, on speech recognition across 19 African languages.</span></div></li>
           <li><span class="year">2025</span><div><strong>Speaker, OSCAFest 2025</strong><span class="sub">Open Source Community Africa Festival.</span></div></li>
-          <li><span class="year">2024–25</span><div><strong>SustainAfrica</strong><span class="sub">Took part in 2024 and 2025.</span></div></li>
+          <li><span class="year">2025</span><div><strong>SustainAfrica, August 2025</strong></div></li>
+          <li><span class="year">2025</span><div><strong>Reviewer, AfricaNLP 2025</strong><span class="sub">AfricaNLP: African Natural Language Processing workshop.</span></div></li>
+          <li><span class="year">2024</span><div><strong>SustainAfrica, June 2024</strong></div></li>
           <li><span class="year">2024</span><div><strong>Youngest invited lecturer, International Centre for Hydropower</strong></div></li>
         </ul>
       </div>
@@ -296,12 +302,12 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
     <div style="margin-top:28px">
       <span class="label">Communities I belong to</span>
       <div class="chips">
-        <span class="chip">Data Scientists Network <small>(Nigeria)</small></span>
-        <span class="chip">Deep Learning Indaba</span>
-        <span class="chip">IndabaX</span>
-        <span class="chip">Masakhane</span>
-        <span class="chip">Zindi</span>
-        <span class="chip">OSCA <small>(Open Source Community Africa)</small></span>
+        <a class="chip" href="https://www.datasciencenigeria.org/">Data Scientists Network <small>(Nigeria)</small></a>
+        <a class="chip" href="https://deeplearningindaba.com/">Deep Learning Indaba</a>
+        <a class="chip" href="https://deeplearningindaba.com/2025/indabax/">IndabaX</a>
+        <a class="chip" href="https://www.masakhane.io/">Masakhane</a>
+        <a class="chip" href="https://zindi.africa/">Zindi</a>
+        <a class="chip" href="https://oscafrica.org/">OSCA <small>(Open Source Community Africa)</small></a>
       </div>
     </div>
   </div>
@@ -354,10 +360,21 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
     </ol>
 
     <div class="sec-head" style="margin-top:44px"><span class="label">Projects</span><h3>Things I have built</h3></div>
+
+    <span class="label proj-group">Research</span>
     <div class="projects">
-      <div class="card"><h3>Yoruba-English ASR</h3><p>Speech recognition for speech that switches between Yoruba and English.</p><a href="https://gbotemib.github.io/projects/yoruba-asr/">Read more</a></div>
-      <div class="card"><h3>PyPSA-Earth</h3><p>An open-source model of the global energy system. I contribute as a modeller.</p><a href="https://github.com/pypsa-meets-earth/pypsa-earth">GitHub</a></div>
+      <div class="card"><h3>Yoruba-English speech recognition</h3><p>Co-led the collection of 100 hours of Yoruba-English code-switched speech. Fine-tuned Whisper and MMS (Massively Multilingual Speech) models, cutting word error rate from 72.6% to 32.2%.</p><a href="https://gbotemib.github.io/projects/yoruba-asr/">Read more</a></div>
+      <div class="card"><h3>PyPSA-Earth</h3><p>Added concentrated solar power with thermal storage, and a Monte Carlo uncertainty module, to this open-source energy model. I am also a maintainer and lead its documentation.</p><a href="https://github.com/pypsa-meets-earth/pypsa-earth">GitHub</a></div>
       <div class="card"><h3>AfriLearner360</h3><p>Culturally grounded test questions for Rwandan primary schools, built on a zero budget.</p><a href="https://github.com/GbotemiB/afrilearner360">GitHub</a></div>
+      <div class="card"><h3>Low-cost electronic nose</h3><p>My undergraduate thesis. A cheap gas sensor device with a machine learning pipeline that tells carbon monoxide and ethylene apart. Published as a peer-reviewed paper.</p><a href="https://ijirr.com/sites/default/files/issues-pdf/4040.pdf">Paper (PDF)</a></div>
+    </div>
+
+    <span class="label proj-group">Engineering</span>
+    <div class="projects">
+      <div class="card"><h3>PyPSA Helper Bot</h3><p>A Discord bot that answers PyPSA questions using the docs, the code and past issues.</p><a href="https://github.com/GbotemiB/pypsa-helper-bot">GitHub</a></div>
+      <div class="card"><h3>Facemask detection on a small device</h3><p>A real-time facemask detection model running on a SIPEED Maixduino, a low-power edge device.</p></div>
+      <div class="card"><h3>GitHub Archive data pipeline</h3><p>An end-to-end batch pipeline and dashboard for GitHub activity data.</p><a href="https://github.com/GbotemiB/gharchive_de_project">GitHub</a></div>
+      <div class="card"><h3>Podcast Summarizer</h3><p>Creates episode summaries, guest lists, highlights and chapters from podcast feeds.</p><a href="https://github.com/GbotemiB/podcastSummarizer">GitHub</a></div>
     </div>
   </div>
 </section>
