@@ -173,6 +173,8 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 .tracker { border: 2px dashed var(--accent); background: var(--surface); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; align-items: center; }
 .soon { display: inline-block; background: var(--mark); color: var(--ink); font-weight: 700; font-size: .85rem; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
 .tracker ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); }
+.tracker-cta { display: grid; gap: 12px; justify-items: start; }
+.tracker-cta p { color: var(--muted); font-size: .95rem; }
 .mock { display: grid; gap: 8px; }
 .mock div { display: grid; grid-template-columns: 1fr 70px; gap: 10px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
 .mock i { display: block; height: 10px; border-radius: 5px; background: var(--line); }
@@ -439,21 +441,19 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
   <div class="wrap">
     <div class="tracker">
       <div>
-        <span class="soon">Preview · coming soon</span>
+        <span class="soon">Live preview</span>
         <h2>Conference deadline tracker</h2>
-        <p style="margin-top:10px; color:var(--muted)">An upgrade of the club's <a href="https://researchclubcmuafrica.github.io/conferences_new.html">conference list</a>. I am building it now, so you can see how it works before the vote. It will:</p>
+        <p style="margin-top:10px; color:var(--muted)">An upgrade of the club's <a href="https://researchclubcmuafrica.github.io/conferences_new.html">conference list</a>. I built it so you can try it before the vote. It:</p>
         <ul>
-          <li>Update itself from the open-source ai-deadlines list and OpenReview</li>
-          <li>Show which deadlines are open or closed, with a countdown</li>
-          <li>Show deadlines in Kigali time</li>
-          <li>Add African venues and workshops, such as AfricaNLP, Deep Learning Indaba and AfriCHI</li>
+          <li>Updates itself every day from the open-source ai-deadlines list and OpenReview</li>
+          <li>Shows which deadlines are open or closed, with a countdown</li>
+          <li>Shows deadlines in Kigali time</li>
+          <li>Adds African venues, such as AfricaNLP and AfriCHI</li>
         </ul>
       </div>
-      <div class="mock" aria-hidden="true">
-        <div><i></i><em>soon</em></div>
-        <div><i class="short"></i><em>soon</em></div>
-        <div><i></i><em>soon</em></div>
-        <div><i class="short"></i><em>soon</em></div>
+      <div class="tracker-cta">
+        <a class="btn primary" href="https://gbotemib.github.io/researchclubcmuafrica.github.io/tracker.html">Open the tracker</a>
+        <p>Built to fit into the club's website, so the club can use it if it wants to.</p>
       </div>
     </div>
   </div>
