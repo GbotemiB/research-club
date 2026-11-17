@@ -215,6 +215,52 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
 .fix ul { margin: 0; padding-left: 18px; color: var(--muted); }
 .fix li + li { margin-top: 8px; }
 @media (max-width: 860px) { .pairs { grid-template-columns: 1fr; } .prob { min-height: 0; } }
+
+/* ---- added: sticky note for the "gap" idea ---- */
+.gapnote { background: var(--mark); color: var(--ink); border-radius: 6px; padding: 22px 24px; max-width: 58ch; margin: 0 0 40px; transform: rotate(-1deg); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+.gapnote p { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.15rem, 2.4vw, 1.4rem); line-height: 1.35; }
+.gapnote b { font-weight: 800; }
+
+/* ---- added: swipe the three plan cards on phones ---- */
+.swipe-hint { display: none; color: var(--muted); font-size: .95rem; margin: -32px 0 40px; }
+@media (max-width: 860px) {
+  .pairs { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 86%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+  .pair { scroll-snap-align: start; }
+  .swipe-hint { display: block; }
+}
+
+/* ---- added: community logos (show only when the file exists) ---- */
+.chip-logo { display: none; height: 22px; width: auto; margin-right: 8px; vertical-align: -6px; padding: 2px 5px; border-radius: 5px; background: #ffffff; box-sizing: content-box; }
+.chip-logo.on-dark { background: #16201c; }
+.chip-logo.ok { display: inline-block; }
+
+/* ---- added: folded sections (campaign-first version) ---- */
+details.fold > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); font-weight: 700; margin-top: 4px; }
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary::after { content: "+"; font-size: 1.3rem; line-height: 1; }
+details.fold[open] > summary::after { content: "\2212"; }
+details.fold[open] > summary { margin-bottom: 24px; }
+
+/* ---- added: bigger portrait, sized for phones too ---- */
+.portrait { width: 380px; height: 380px; border-width: 8px; }
+@media (max-width: 1080px) { .portrait { width: 320px; height: 320px; } }
+@media (max-width: 860px) {
+  .portrait { width: min(78vw, 320px); height: min(78vw, 320px); justify-self: center; margin-bottom: 4px; }
+}
+@media (max-width: 380px) {
+  .portrait { width: 240px; height: 240px; }
+}
+
+/* ---- logo tiles: logos first, name only if a logo can't load ---- */
+.logo-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.logo-tile { display: inline-flex; align-items: center; justify-content: center; min-width: 120px; height: 72px; padding: 10px 18px; border-radius: 14px; background: #ffffff; border: 1px solid var(--line); text-decoration: none; color: #16201c; font-weight: 700; transition: border-color .15s, transform .15s; }
+.logo-tile:hover { border-color: var(--accent); transform: translateY(-2px); }
+.logo-tile.on-dark { background: #16201c; color: #ffffff; }
+.logo-tile img { max-height: 46px; max-width: 150px; width: auto; height: auto; display: block; }
+.logo-tile .logo-name { display: none; text-align: center; line-height: 1.2; font-size: .95rem; }
+.logo-tile.no-logo .logo-name { display: block; }
+.logo-tile.no-logo img { display: none; }
+@media (prefers-reduced-motion: reduce) { .logo-tile:hover { transform: none; } }
 </style>
 </head>
 <body>
@@ -224,11 +270,11 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
     <a class="brand" href="#top">Emmanuel Bolarinwa</a>
     <nav aria-label="Sections">
       <ul>
-        <li><a href="#about">About</a></li>
         <li><a href="#manifesto">Manifesto</a></li>
-        <li><a href="#record">Record</a></li>
-        <li><a href="#papers">Papers</a></li>
         <li><a href="#tracker">Tracker</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#papers">Papers</a></li>
+        <li><a href="#record">Record</a></li>
       </ul>
     </nav>
   </div>
@@ -246,7 +292,8 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
       <p class="lede">I am a first-year MSEAI (MS in Engineering Artificial Intelligence) student at CMU-Africa. I work on speech recognition for African languages and on energy system modelling. I want every student who wants to do research to find a way in, and people to do it with.</p>
       <div class="cta">
         <a class="btn primary" href="#manifesto">Read my manifesto</a>
-        <a class="btn ghost" href="#record">See my work</a>
+        <a class="btn ghost" href="#about">About me</a>
+        <a class="btn ghost" href="#papers">See my work</a>
       </div>
     </div>
     <div class="portrait">
@@ -259,19 +306,7 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
       <div class="stat"><b>6</b><span>published papers</span></div>
       <div class="stat"><b>2</b><span>awards at Deep Learning Indaba 2025</span></div>
       <div class="stat"><b>19</b><span>African languages in the WAXAL-NET work</span></div>
-      <div class="stat"><b>6</b><span>research communities I am part of</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="wrap">
-    <div class="prose">
-      <div class="sec-head"><span class="label">About me</span><h2>Speech, energy, and people who build together</h2></div>
-      <p>I am a first-year master's student in Engineering Artificial Intelligence at Carnegie Mellon University Africa (CMU-Africa) in Kigali. Before that, I studied Computer Engineering at Obafemi Awolowo University in Nigeria.</p>
-      <p>My research covers two areas. The first is speech and language technology for low-resource African languages, especially Yoruba and Yoruba-English code-switched speech (speech that moves between the two languages). The second is open-source energy system modelling for national energy plans.</p>
-      <p>Most of my work has been done in teams, with friends, colleagues and classmates. That is why my campaign is built around collaboration.</p>
+      <div class="stat"><b>7</b><span>research communities I am part of</span></div>
     </div>
   </div>
 </section>
@@ -281,6 +316,7 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
   <div class="wrap">
     <span class="label">Manifesto</span>
     <p class="motto">Anyone can do research. Together, we can do more.</p>
+    <div class="gapnote"><p><b>Research never ends.</b> There are always more gaps to find. I’m here to fill this one, so together we can find more gaps and fill them.</p></div>
 
     <div class="vm">
       <div class="card"><span class="label">Vision</span><p>Every CMU-Africa student who wants to do research can find a way in, and people to do it with.</p></div>
@@ -316,6 +352,7 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
       </div>
     </div>
 
+    <p class="swipe-hint">Swipe to see all three.</p>
     <h2>How you will know it is working</h2>
     <p style="color:var(--muted); margin-top:8px; max-width:65ch">At the end of each semester, I will share a short update on:</p>
     <ul class="checks">
@@ -327,44 +364,37 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
   </div>
 </section>
 
-<!-- RECORD -->
-<section id="record">
+<!-- TRACKER -->
+<section id="tracker">
   <div class="wrap">
-    <div class="sec-head"><span class="label">Research record</span><h2>What I have done so far</h2><p>Every item here was team work. I am grateful to the people I did it with.</p></div>
-    <div class="two">
-      <div class="card">
-        <span class="label">Awards and selection</span>
-        <ul class="list">
-          <li><span class="year">2025</span><div><strong>Best Paper Award, Deep Learning Indaba</strong><span class="sub">For our paper on Yoruba-English code-switched speech recognition (top 1% of submissions).</span></div></li>
-          <li><span class="year">2025</span><div><strong>Poster Award, Deep Learning Indaba</strong></div></li>
-          <li><span class="year">2026</span><div><strong>Top finalist, Student Induction Program (SIP) bootcamp project</strong><span class="sub">The project grew into AfriLearner360. Our paper on it was accepted at the NeurIPS 2026 GlobalSouthAI workshop.</span></div></li>
-          <li><span class="year">2026</span><div><strong>Three posters accepted at the WiML workshop, NeurIPS 2026</strong><span class="sub">WiML: Women in Machine Learning.</span></div></li>
+    <div class="tracker">
+      <div>
+        <span class="soon">Live preview</span>
+        <h2>Conference deadline tracker</h2>
+        <p style="margin-top:10px; color:var(--muted)">An upgrade of the club's <a href="https://researchclubcmuafrica.github.io/conferences_new.html">conference list</a>. I built it so you can try it before the vote. It:</p>
+        <ul>
+          <li>Updates itself every day from the open-source ai-deadlines list and OpenReview</li>
+          <li>Shows which deadlines are open or closed, with a countdown</li>
+          <li>Shows deadlines in Kigali time</li>
+          <li>Adds African venues, such as AfricaNLP and AfriCHI</li>
         </ul>
       </div>
-      <div class="card">
-        <span class="label">Service and talks</span>
-        <ul class="list">
-          <li><span class="year">2026</span><div><strong>Reviewer, GlobalSouthAI workshop at NeurIPS 2026</strong></div></li>
-          <li><span class="year">2026</span><div><strong>Co-author, WAXAL-NET</strong><span class="sub">A paper with 31 authors, many from CMU-Africa, on speech recognition across 19 African languages.</span></div></li>
-          <li><span class="year">2025</span><div><strong>Speaker, OSCAFest 2025</strong><span class="sub">Open Source Community Africa Festival.</span></div></li>
-          <li><span class="year">2025</span><div><strong>SustainAfrica, August 2025</strong></div></li>
-          <li><span class="year">2025</span><div><strong>Reviewer, AfricaNLP 2025</strong><span class="sub">AfricaNLP: African Natural Language Processing workshop.</span></div></li>
-          <li><span class="year">2024</span><div><strong>SustainAfrica, June 2024</strong></div></li>
-          <li><span class="year">2024</span><div><strong>Youngest invited lecturer, International Centre for Hydropower</strong></div></li>
-        </ul>
+      <div class="tracker-cta">
+        <a class="btn primary" href="https://gbotemib.github.io/researchclubcmuafrica.github.io/tracker.html">Open the tracker</a>
+        <p>Built to fit into the club's website, so the club can use it if it wants to.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <div style="margin-top:28px">
-      <span class="label">Communities I belong to</span>
-      <div class="chips">
-        <a class="chip" href="https://www.datasciencenigeria.org/">Data Scientists Network <small>(Nigeria)</small></a>
-        <a class="chip" href="https://deeplearningindaba.com/">Deep Learning Indaba</a>
-        <a class="chip" href="https://deeplearningindaba.com/2025/indabax/">IndabaX</a>
-        <a class="chip" href="https://www.masakhane.io/">Masakhane</a>
-        <a class="chip" href="https://zindi.africa/">Zindi</a>
-        <a class="chip" href="https://oscafrica.org/">OSCA <small>(Open Source Community Africa)</small></a>
-      </div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="prose">
+      <div class="sec-head"><span class="label">About me</span><h2>Speech, energy, and people who build together</h2></div>
+      <p>I am a first-year master's student in Engineering Artificial Intelligence at Carnegie Mellon University Africa (CMU-Africa) in Kigali. Before that, I studied Computer Engineering at Obafemi Awolowo University in Nigeria.</p>
+      <p>My research covers two areas. The first is speech and language technology for low-resource African languages, especially Yoruba and Yoruba-English code-switched speech (speech that moves between the two languages). The second is open-source energy system modelling for national energy plans.</p>
+      <p>Most of my work has been done in teams, with friends, colleagues and classmates. That is why my campaign is built around collaboration.</p>
     </div>
   </div>
 </section>
@@ -432,30 +462,52 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
       <div class="card"><h3>GitHub Archive data pipeline</h3><p>An end-to-end batch pipeline and dashboard for GitHub activity data.</p><a href="https://github.com/GbotemiB/gharchive_de_project">GitHub</a></div>
       <div class="card"><h3>Podcast Summarizer</h3><p>Creates episode summaries, guest lists, highlights and chapters from podcast feeds.</p><a href="https://github.com/GbotemiB/podcastSummarizer">GitHub</a></div>
     </div>
+  
   </div>
 </section>
 
-
-<!-- TRACKER -->
-<section id="tracker">
+<!-- RECORD -->
+<section id="record">
   <div class="wrap">
-    <div class="tracker">
-      <div>
-        <span class="soon">Live preview</span>
-        <h2>Conference deadline tracker</h2>
-        <p style="margin-top:10px; color:var(--muted)">An upgrade of the club's <a href="https://researchclubcmuafrica.github.io/conferences_new.html">conference list</a>. I built it so you can try it before the vote. It:</p>
-        <ul>
-          <li>Updates itself every day from the open-source ai-deadlines list and OpenReview</li>
-          <li>Shows which deadlines are open or closed, with a countdown</li>
-          <li>Shows deadlines in Kigali time</li>
-          <li>Adds African venues, such as AfricaNLP and AfriCHI</li>
+    <div class="sec-head"><span class="label">Research record</span><h2>What I have done so far</h2><p>Every item here was team work. I am grateful to the people I did it with.</p></div>
+    <div class="two">
+      <div class="card">
+        <span class="label">Awards and selection</span>
+        <ul class="list">
+          <li><span class="year">2025</span><div><strong>Best Paper Award, Deep Learning Indaba</strong><span class="sub">For our paper on Yoruba-English code-switched speech recognition (top 1% of submissions).</span></div></li>
+          <li><span class="year">2025</span><div><strong>Poster Award, Deep Learning Indaba</strong></div></li>
+          <li><span class="year">2026</span><div><strong>Top finalist, Student Induction Program (SIP) bootcamp project</strong><span class="sub">The project grew into AfriLearner360. Our paper on it was accepted at the NeurIPS 2026 GlobalSouthAI workshop.</span></div></li>
+          <li><span class="year">2026</span><div><strong>Three posters accepted at the WiML workshop, NeurIPS 2026</strong><span class="sub">WiML: Women in Machine Learning.</span></div></li>
         </ul>
       </div>
-      <div class="tracker-cta">
-        <a class="btn primary" href="https://gbotemib.github.io/researchclubcmuafrica.github.io/tracker.html">Open the tracker</a>
-        <p>Built to fit into the club's website, so the club can use it if it wants to.</p>
+      <div class="card">
+        <span class="label">Service and talks</span>
+        <ul class="list">
+          <li><span class="year">2026</span><div><strong>Reviewer, GlobalSouthAI workshop at NeurIPS 2026</strong></div></li>
+          <li><span class="year">2026</span><div><strong>Co-author, WAXAL-NET</strong><span class="sub">A paper with 31 authors, many from CMU-Africa, on speech recognition across 19 African languages.</span></div></li>
+          <li><span class="year">2026</span><div><strong>Presenter, OpenMod Africa</strong><span class="sub">South Africa.</span></div></li>
+          <li><span class="year">2025</span><div><strong>Speaker, OSCAFest 2025</strong><span class="sub">Open Source Community Africa Festival.</span></div></li>
+          <li><span class="year">2025</span><div><strong>SustainAfrica, August 2025</strong></div></li>
+          <li><span class="year">2025</span><div><strong>Reviewer, AfricaNLP 2025</strong><span class="sub">AfricaNLP: African Natural Language Processing workshop.</span></div></li>
+          <li><span class="year">2024</span><div><strong>SustainAfrica, June 2024</strong></div></li>
+          <li><span class="year">2024</span><div><strong>Youngest invited lecturer, International Centre for Hydropower</strong></div></li>
+        </ul>
       </div>
     </div>
+
+    <div style="margin-top:28px">
+      <span class="label">Communities I belong to</span>
+      <div class="logo-row">
+        <a class="logo-tile" href="https://deeplearningindaba.com/" title="Deep Learning Indaba"><img src="https://deeplearningindaba.com/wp-content/uploads/2025/08/indaba-logo.png" alt="Deep Learning Indaba" referrerpolicy="no-referrer"><span class="logo-name">Deep Learning Indaba</span></a>
+        <a class="logo-tile" href="https://www.masakhane.io/" title="Masakhane"><img src="https://github.com/masakhane-io.png?size=120" alt="Masakhane" referrerpolicy="no-referrer"><span class="logo-name">Masakhane</span></a>
+        <a class="logo-tile" href="https://www.blackinai.org/" title="Black in AI"><img src="https://blackinai.joleh.com/uploads/default/original/2X/3/3bbed510517a79d7e535fe1c5edde5868f1edc56.png" alt="Black in AI" referrerpolicy="no-referrer"><span class="logo-name">Black in AI</span></a>
+        <a class="logo-tile" href="https://zindi.africa/" title="Zindi"><img src="https://www.globalafricanetwork.com/wp-content/uploads/2019/12/zindi-logo.png" alt="Zindi" referrerpolicy="no-referrer"><span class="logo-name">Zindi</span></a>
+        <a class="logo-tile on-dark" href="https://oscafrica.org/" title="OSCA (Open Source Community Africa)"><img src="https://res.cloudinary.com/osca/image/upload/v1576374354/osf/Logo/PNG/white.png" alt="OSCA (Open Source Community Africa)" referrerpolicy="no-referrer"><span class="logo-name">OSCA (Open Source Community Africa)</span></a>
+        <a class="logo-tile no-logo" href="https://www.datasciencenigeria.org/" title="Data Scientists Network (Nigeria)"><span class="logo-name">Data Scientists Network (Nigeria)</span></a>
+        <a class="logo-tile no-logo" href="https://deeplearningindaba.com/2025/indabax/" title="IndabaX Nigeria"><span class="logo-name">IndabaX Nigeria</span></a>
+      </div>
+    </div>
+  
   </div>
 </section>
 
@@ -481,5 +533,15 @@ footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
   </div>
 </footer>
 
+
+<script>
+(function () {
+  document.querySelectorAll('.logo-tile img').forEach(function (img) {
+    function fail() { img.parentElement.classList.add('no-logo'); }
+    if (img.complete && img.naturalWidth === 0) fail();
+    img.addEventListener('error', fail);
+  });
+})();
+</script>
 </body>
 </html>
